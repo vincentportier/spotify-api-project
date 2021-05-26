@@ -64,7 +64,8 @@ const Stats = styled.div`
 
 export const Tracklist = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  /* grid-template-columns: 1fr 1fr; */
+  grid-template-columns: 1fr;
   padding: 50px;
   column-gap: 50px;
 
@@ -123,7 +124,6 @@ export const Profile = () => {
       setUser(data.user);
       setFollowing(data.following);
       setNewReleases(data.newReleases.albums.items);
-      setRecommandations(data.recommandations.tracks);
     };
     fetchData().catch((e) => {
       console.error(e);
@@ -181,7 +181,7 @@ export const Profile = () => {
           <Tracklist>
             <div>
               <div className="title">
-                <h2>What's new</h2>
+                <h2>What's new on Spotify</h2>
                 <a
                   onClick={() => setShowMoreNews(!showMoreNews)}
                   className="toggle-button"
@@ -210,7 +210,7 @@ export const Profile = () => {
                       return <TrackItem track={track} new_release />;
                     }))}
             </div>
-            <div>
+            {/* <div>
               <div className="title">
                 <h2>Recommandations</h2>
                 <a
@@ -228,7 +228,7 @@ export const Profile = () => {
                   : recommandations
                       .slice(0, 3)
                       .map((track) => <TrackItem track={track} />))}
-            </div>
+            </div> */}
           </Tracklist>
         </Fragment>
       ) : (

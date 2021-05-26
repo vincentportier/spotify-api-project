@@ -69,6 +69,8 @@ export const getAccessToken = () => {
 
 export const token = getAccessToken();
 
+console.log(token);
+
 export const logout = () => {
   window.localStorage.removeItem("spotify_access_token");
   window.localStorage.removeItem("spotify_refresh_token");
@@ -235,21 +237,19 @@ export const getUserInfo = () => {
       getFollowing(),
       getPlaylists(),
       getNewReleases(),
-      getArtistsRecommandation(),
+      // getArtistsRecommandation(),
     ])
     .then(
-      axios.spread(
-        (user, following, playlists, newReleases, recommandations) => {
-          let data = {
-            user: user.data,
-            following: following.data,
-            playlists: playlists.data,
-            newReleases: newReleases.data,
-            recommandations: recommandations.data,
-          };
+      axios.spread((user, following, playlists, newReleases) => {
+        let data = {
+          user: user.data,
+          following: following.data,
+          playlists: playlists.data,
+          newReleases: newReleases.data,
+          // recommandations: recommandations.data,
+        };
 
-          return data;
-        }
-      )
+        return data;
+      })
     );
 };
