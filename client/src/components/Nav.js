@@ -100,7 +100,7 @@ const MenuItem = styled.li`
   }
 `;
 
-const NavLink = (props) => <Link activeClassName="active" {...props} />;
+const NavLink = (props) => <Link activeclassname="active" {...props} />;
 
 export const Nav = () => {
   return (
@@ -143,8 +143,7 @@ export const Nav = () => {
           <a
             href="https://github.com/vincentportier/spotify-api-project"
             target="_blank"
-            rel="noopener"
-            rel="noreferrer"
+            rel="noopener noreferrer"
           >
             <IconGithub />
           </a>

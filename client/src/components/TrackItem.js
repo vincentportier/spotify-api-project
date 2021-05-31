@@ -90,7 +90,7 @@ export const TrackItem = ({ track, played_at, new_release, index }) => {
           }}
         >
           <CoverWrapper className={isHovered ? "isHovered" : null}>
-            <img src={track.album.images[2].url}></img>
+            <img src={track.album.images[2].url} alt="album cover"></img>
             {isHovered && <div>i</div>}
           </CoverWrapper>
           <TrackDetails isHovered={isHovered}>
@@ -100,8 +100,8 @@ export const TrackItem = ({ track, played_at, new_release, index }) => {
               <p className="track_details">
                 {track.album.artists.map((artist, i, artists) => {
                   if (i === artists.length - 1) {
-                    return <span>{artist.name} -</span>;
-                  } else return <span>{artist.name}, </span>;
+                    return <span key={artist.id}>{artist.name} -</span>;
+                  } else return <span key={artist.id}>{artist.name}, </span>;
                 })}
                 <span>
                   {" "}
@@ -123,8 +123,8 @@ export const TrackItem = ({ track, played_at, new_release, index }) => {
     </Fragment>
   );
 };
-{
-  /*       
+
+/*       
    {topTracks ? (
         <div>
           {topTracks.items &&
@@ -162,4 +162,3 @@ export const TrackItem = ({ track, played_at, new_release, index }) => {
             })}
         </div>)</div>
 }; */
-}

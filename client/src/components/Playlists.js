@@ -75,7 +75,7 @@ export const Playlists = () => {
       {playlists ? (
         <PlaylistsGrid>
           {playlists.map((playlist) => (
-            <PlaylistItem to={`/playlist/${playlist.id}`}>
+            <PlaylistItem to={`/playlist/${playlist.id}`} key={playlist.id}>
               <div className="cover-container">
                 <img
                   src={
@@ -83,6 +83,7 @@ export const Playlists = () => {
                       ? playlist.images[0].url
                       : placeholderImage
                   }
+                  alt="playlist cover"
                 />
               </div>
               <h2>{playlist.name}</h2>

@@ -69,8 +69,6 @@ export const getAccessToken = () => {
 
 export const token = getAccessToken();
 
-console.log(token);
-
 export const logout = () => {
   window.localStorage.removeItem("spotify_access_token");
   window.localStorage.removeItem("spotify_refresh_token");

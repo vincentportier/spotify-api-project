@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Loader } from "./Loader";
 import styled from "styled-components";
 import { getTrackInfo } from "../spotify/index";
-import { AudioFeaturesChart } from "./AudioFeaturesChart";
+
 import { Link } from "react-router-dom";
 
 const Header = styled.header`
@@ -62,11 +62,8 @@ const TrackInfo = styled.div`
   }
 `;
 
-const ChartWrapper = styled.div``;
-
 export const Track = (props) => {
   const [track, setTrack] = useState(null);
-  const [audioFeatures, setAudioFeatures] = useState(null);
 
   let { trackId } = useParams();
 
@@ -74,10 +71,9 @@ export const Track = (props) => {
     const fetchData = async () => {
       const data = await getTrackInfo(trackId);
       setTrack(data.track);
-      setAudioFeatures(data.audioFeatures);
     };
     fetchData().catch((err) => console.error(err));
-  }, []);
+  }, [trackId]);
 
   return (
     <div className="main-view">
@@ -87,13 +83,17 @@ export const Track = (props) => {
         <div>
           <Header>
             <Cover>
-              <img src={track.album.images[1].url} />
+              <img src={track.album.images[1].url} alt="album cover" />
             </Cover>
             <TrackInfo>
               <h1>{track.name}</h1>
 
               {track.artists.map((artist, i, arr) => (
-                <Link to={`/artist/${artist.id}`} className="artist-link">
+                <Link
+                  to={`/artist/${artist.id}`}
+                  className="artist-link"
+                  key={artist.id}
+                >
                   {i === arr.length - 1 ? (
                     <span>{artist.name}</span>
                   ) : (

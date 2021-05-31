@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { shuffle } from "../utils/index";
 import {
@@ -37,17 +37,18 @@ const RecommendationsContainer = styled.div`
   }
 `;
 
-const SaveButton = styled.div`
+const SaveButton = styled.button`
   margin-left: 50px;
   display: inline-block;
   text-align: center;
   font-size: var(--fz-xxs);
+  color: var(--white);
+  background: var(--primary);
+  padding: 10px 20px;
+  border-radius: 30px;
 
-  a {
-    background: var(--primary);
-    padding: 10px 20px;
-    border-radius: 30px;
-  }
+  border: none;
+  cursor: pointer;
 `;
 
 export const Recommendations = ({ tracks }) => {
@@ -106,7 +107,7 @@ export const Recommendations = ({ tracks }) => {
     };
 
     const addTracks = async (playlistId, uris) => {
-      const { data } = await addTracksToPlaylist(playlistId, uris);
+      await addTracksToPlaylist(playlistId, uris);
       return playlistId;
     };
 
@@ -132,21 +133,21 @@ export const Recommendations = ({ tracks }) => {
               </span>
             </h1>
             {user && (
-              <SaveButton>
-                <a
-                  onClick={() => {
-                    savePlaylist();
-                  }}
-                >
-                  SAVE TO SPOTIFY
-                </a>
+              <SaveButton
+                onClick={() => {
+                  savePlaylist();
+                }}
+              >
+                SAVE TO SPOTIFY
               </SaveButton>
             )}
           </header>
-          <p>
+          <div>
             {recommendation &&
-              recommendation.map((track) => <TrackItem track={track} />)}
-          </p>
+              recommendation.map((track) => (
+                <TrackItem track={track} key={track.id} />
+              ))}
+          </div>
         </RecommendationsContainer>
       ) : (
         <Loader />

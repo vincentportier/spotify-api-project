@@ -82,7 +82,9 @@ export const Tracks = () => {
       {topTracks ? (
         <Tracklist>
           {topTracks.items &&
-            topTracks.items.map((track) => <TrackItem track={track} />)}
+            topTracks.items.map((track) => (
+              <TrackItem track={track} key={track.id} />
+            ))}
         </Tracklist>
       ) : (
         <Loader />

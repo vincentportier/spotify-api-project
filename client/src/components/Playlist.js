@@ -85,7 +85,7 @@ export const Playlist = () => {
         <PlaylistContainer>
           <header>
             <div className="cover-container">
-              <img src={coverUrl} />
+              <img src={coverUrl} alt="album cover" />
             </div>
             <h1>{playlist.name}</h1>
             <p>By {playlist.owner.display_name}</p>
@@ -97,7 +97,7 @@ export const Playlist = () => {
           </header>
           <ul>
             {playlist.tracks.items.map((track, i) => (
-              <TrackItem track={track.track} />
+              <TrackItem track={track.track} key={track.track.id} />
             ))}
           </ul>
         </PlaylistContainer>

@@ -29,7 +29,11 @@ export const Recent = () => {
       <div>
         {recent ? (
           recent.map((track) => (
-            <TrackItem track={track.track} played_at={track.played_at} />
+            <TrackItem
+              track={track.track}
+              played_at={track.played_at}
+              key={track.id}
+            />
           ))
         ) : (
           <Loader />

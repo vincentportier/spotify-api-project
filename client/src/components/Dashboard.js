@@ -1,5 +1,4 @@
 import React from "react";
-import { logout } from "../spotify/index";
 
 import { Nav } from "./Nav";
 import { Recent } from "./Recent";

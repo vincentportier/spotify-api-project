@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { getArtistInfo } from "../spotify/index";
 import { TrackItem } from "./TrackItem";
@@ -45,7 +45,7 @@ const TopTracks = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    a {
+    button {
       ${({ theme }) => theme.mixins.button}
       display:flex;
       align-items: center;
@@ -58,6 +58,7 @@ const TopTracks = styled.div`
         background: var(--white);
         color: var(--charcoal);
         border-color: transparent;
+        cursor: pointer;
       }
     }
   }
@@ -121,9 +122,16 @@ export const Artist = () => {
       {artist ? (
         <ArtistContainer>
           <Avatar>
-            <img src={artist.images[0].url}></img>
+            <img
+              src={artist.images[0].url}
+              alt={`${artist.name} portrait`}
+            ></img>
           </Avatar>
-          <a href={artist.external_urls.spotify} target="_blank">
+          <a
+            href={artist.external_urls.spotify}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <h1>{artist.name}</h1>
           </a>
           <Stats>
@@ -136,8 +144,10 @@ export const Artist = () => {
                 {artist.genres &&
                   artist.genres
                     .slice(0, 4)
-                    .map((genre) => (
-                      <li>{genre[0].toUpperCase() + genre.substring(1)}</li>
+                    .map((genre, i) => (
+                      <li key={i}>
+                        {genre[0].toUpperCase() + genre.substring(1)}
+                      </li>
                     ))}
               </ul>
               <p className="title">GENRES</p>
@@ -151,20 +161,27 @@ export const Artist = () => {
           <TopTracks>
             <header>
               <h2>Top tracks</h2>
-              <a
-                onClick={() => setShowTopTracks(!showTopTracks)}
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowTopTracks(!showTopTracks);
+                }}
                 className="toggle-button"
               >
                 {showTopTracks ? "SHOW LESS" : "SHOW MORE"}
-              </a>
+              </button>
             </header>
             {topTracks && (
               <div>
                 {!showTopTracks
                   ? topTracks
                       .slice(0, 3)
-                      .map((track) => <TrackItem track={track} />)
-                  : topTracks.map((track) => <TrackItem track={track} />)}
+                      .map((track) => (
+                        <TrackItem track={track} key={track.id} />
+                      ))
+                  : topTracks.map((track) => (
+                      <TrackItem track={track} key={track.id} />
+                    ))}
               </div>
             )}
           </TopTracks>
@@ -190,6 +207,7 @@ export const Artist = () => {
                         <div className="avatar">
                           <img
                             src={artist.images && artist.images[0].url}
+                            alt={`${artist.name} portrait`}
                           ></img>
                           {isHovered === i && <div className="info">i</div>}
                         </div>

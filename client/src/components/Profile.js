@@ -111,9 +111,9 @@ export const Profile = () => {
   const [user, setUser] = useState(null);
   const [following, setFollowing] = useState(null);
   const [playlists, setPlaylists] = useState(null);
-  const [recommandations, setRecommandations] = useState(null);
+  // const [recommandations, setRecommandations] = useState(null);
   const [newReleases, setNewReleases] = useState(null);
-  const [showMoreRecommandations, setShowMoreRecommandations] = useState(false);
+  // const [showMoreRecommandations, setShowMoreRecommandations] = useState(false);
   const [showMoreNews, setShowMoreNews] = useState(false);
 
   useEffect(() => {
@@ -144,12 +144,11 @@ export const Profile = () => {
             <a
               href={spotify_profile_url}
               target="_blank"
-              rel="noopener"
-              rel="noreferer"
+              rel="noopener noreferrer"
               className="profile-url"
             >
               <Avatar>
-                <img src={image}></img>
+                <img src={image} alt="user profilepicture"></img>
               </Avatar>
 
               <UserName>{name}</UserName>
@@ -182,12 +181,12 @@ export const Profile = () => {
             <div>
               <div className="title">
                 <h2>What's new on Spotify</h2>
-                <a
+                <button
                   onClick={() => setShowMoreNews(!showMoreNews)}
                   className="toggle-button"
                 >
                   {showMoreNews ? "SHOW LESS" : "SHOW MORE"}
-                </a>
+                </button>
               </div>
               {newReleases &&
                 (showMoreNews
@@ -198,7 +197,9 @@ export const Profile = () => {
                         name: album.name,
                         id: album.id,
                       };
-                      return <TrackItem track={track} new_release />;
+                      return (
+                        <TrackItem track={track} new_release key={track.id} />
+                      );
                     })
                   : newReleases.slice(0, 3).map((album) => {
                       let track = {
@@ -207,7 +208,9 @@ export const Profile = () => {
                         name: album.name,
                         id: album.id,
                       };
-                      return <TrackItem track={track} new_release />;
+                      return (
+                        <TrackItem track={track} new_release key={track.id} />
+                      );
                     }))}
             </div>
             {/* <div>

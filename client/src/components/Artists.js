@@ -165,7 +165,10 @@ export const Artists = () => {
                 }
               >
                 <div className="avatar">
-                  <img src={artist.images && artist.images[0].url}></img>
+                  <img
+                    src={artist.images && artist.images[0].url}
+                    alt={`${artist.name} portrait`}
+                  ></img>
                   {isHovered === i && <div className="info">i</div>}
                 </div>
                 <h1 className="name">{artist.name}</h1>
