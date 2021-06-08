@@ -236,6 +236,7 @@ export const getUserInfo = () => {
       getPlaylists(),
       getNewReleases(),
       // getArtistsRecommandation(),
+      console.log("test"),
     ])
     .then(
       axios.spread((user, following, playlists, newReleases) => {
